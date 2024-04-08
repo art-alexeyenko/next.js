@@ -96,6 +96,9 @@ export type ImageConfigComplete = {
 
   /** @see [Unoptimized](https://nextjs.org/docs/api-reference/next/image#unoptimized) */
   unoptimized: boolean
+
+  /** @see [UnoptimizedFallback](link to be added) */
+  unoptimizedFallback: boolean
 }
 
 export type ImageConfig = Partial<ImageConfigComplete>
@@ -115,4 +118,5 @@ export const imageConfigDefault: ImageConfigComplete = {
   contentDispositionType: 'inline',
   remotePatterns: [],
   unoptimized: false,
+  unoptimizedFallback: false,
 }

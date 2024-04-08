@@ -6,6 +6,7 @@ import type {
   ImageLoaderProps,
   ImageLoaderPropsWithConfig,
 } from './image-config'
+import { hasMatch } from './match-remote-pattern'
 
 export interface StaticImageData {
   src: string
@@ -413,6 +414,16 @@ export function getImgProps(
       // instead console.error(ref) during mount.
       unoptimized = true
     } else {
+      if (config.unoptimizedFallback) {
+        try {
+          let parsedSrc = new URL(src)
+          if (!hasMatch(config.domains, config.remotePatterns, parsedSrc)) {
+            unoptimized = true;
+          }
+        } catch (err) {
+          unoptimized = true;
+        }        
+      }
       if (fill) {
         if (width) {
           throw new Error(
